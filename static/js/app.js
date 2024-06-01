@@ -24,6 +24,7 @@ function buildMetadata(sample) {
 }
 
 // function to build both charts
+// Function to build both charts
 function buildCharts(sample) {
   d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
 
@@ -38,6 +39,11 @@ function buildCharts(sample) {
     let otu_ids = result.otu_ids;
     let otu_labels = result.otu_labels;
     let sample_values = result.sample_values;
+
+    // Debugging logs
+    console.log("OTU IDs:", otu_ids);
+    console.log("Sample Values:", sample_values);
+    console.log("OTU Labels:", otu_labels);
 
     // Build a Bubble Chart
     let bubbleData = [{
@@ -64,13 +70,19 @@ function buildCharts(sample) {
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
     let yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
+    let barValues = sample_values.slice(0, 10).reverse();
+    let barLabels = otu_labels.slice(0, 10).reverse();
+
+    // Debugging logs for bar chart data
+    console.log("Y Ticks:", yticks);
+    console.log("Bar Values:", barValues);
+    console.log("Bar Labels:", barLabels);
 
     // Build a Bar Chart
-    // Don't forget to slice and reverse the input data appropriately
     let barData = [{
       y: yticks,
-      x: sample_values.slice(0, 10).reverse(),
-      text: otu_labels.slice(0, 10).reverse(),
+      x: barValues,
+      text: barLabels,
       type: 'bar',
       orientation: 'h'
     }];
@@ -85,7 +97,6 @@ function buildCharts(sample) {
 
   }).catch(error => console.log(error));
 }
-
 
 // Function to run on page load
 function init() {
