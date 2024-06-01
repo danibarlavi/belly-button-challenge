@@ -11,3 +11,6 @@
 
 
 I used ChatOpenAI for assistance with some language for plotly/D3 adn for troubleshooting when I had difficult rendering the bar graph correctly.
+
+Site hosted here on GitHub Pages
+https://danibarlavi.github.io/belly-button-challenge/
