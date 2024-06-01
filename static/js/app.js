@@ -40,7 +40,7 @@ function buildCharts(sample) {
     let sample_values = result.sample_values;
 
     // Build a Bubble Chart
-    let bubchartData = [{
+    let bubbleData = [{
       x: otu_ids,
       y: sample_values,
       text: otu_labels,
@@ -52,39 +52,40 @@ function buildCharts(sample) {
       }
     }];
 
-    let bubchartLayout = {
+    let bubbleLayout = {
       title: 'Bacteria Cultures Per Sample',
       hovermode: 'closest',
-      xaxis: {title: 'OTU ID'},
-      margin: {t: 30}
+      xaxis: { title: 'OTU ID' },
+      margin: { t: 30 }
     };
 
     // Render the Bubble Chart
-    Plotly.newPlot('bubble', bubchartData, bubchartLayout);
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for your yticks
-    let bar_yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
+    let yticks = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
 
     // Build a Bar Chart
     // Don't forget to slice and reverse the input data appropriately
-    let barchartData = [{
-      y: bar_yticks,
+    let barData = [{
+      y: yticks,
       x: sample_values.slice(0, 10).reverse(),
       text: otu_labels.slice(0, 10).reverse(),
       type: 'bar',
       orientation: 'h'
     }];
 
-    let barchartLayout = {
+    let barLayout = {
       title: "Top 10 Bacteria Cultures Found",
-      margin: {t: 30, l: 150}
+      margin: { t: 30, l: 150 }
     };
 
     // Render the Bar Chart
-    Plotly.newPlot('bar', barchartData, barchartLayout);
+    Plotly.newPlot('bar', barData, barLayout);
 
   }).catch(error => console.log(error));
 }
+
 
 // Function to run on page load
 function init() {
